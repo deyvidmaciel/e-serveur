@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EServeurDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EServeurDatabaseModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="EServeurDatabaseModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TblCategoria" EntityType="EServeurDatabaseModel.Store.TblCategoria" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TblIngrediente" EntityType="EServeurDatabaseModel.Store.TblIngrediente" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TblPedido" EntityType="EServeurDatabaseModel.Store.TblPedido" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TblPedidoItem" EntityType="EServeurDatabaseModel.Store.TblPedidoItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TblProduto" EntityType="EServeurDatabaseModel.Store.TblProduto" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TblProdutoIngrediente" EntityType="EServeurDatabaseModel.Store.TblProdutoIngrediente" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_TblPedidoItem_TblPedido" Association="EServeurDatabaseModel.Store.FK_TblPedidoItem_TblPedido">
+            <End Role="TblPedido" EntitySet="TblPedido" />
+            <End Role="TblPedidoItem" EntitySet="TblPedidoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPedidoItem_TblProduto" Association="EServeurDatabaseModel.Store.FK_TblPedidoItem_TblProduto">
+            <End Role="TblProduto" EntitySet="TblProduto" />
+            <End Role="TblPedidoItem" EntitySet="TblPedidoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProduto_TblCategoria" Association="EServeurDatabaseModel.Store.FK_TblProduto_TblCategoria">
+            <End Role="TblCategoria" EntitySet="TblCategoria" />
+            <End Role="TblProduto" EntitySet="TblProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProdutoIngrediente_TblIngrediente" Association="EServeurDatabaseModel.Store.FK_TblProdutoIngrediente_TblIngrediente">
+            <End Role="TblIngrediente" EntitySet="TblIngrediente" />
+            <End Role="TblProdutoIngrediente" EntitySet="TblProdutoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProdutoIngrediente_TblProduto" Association="EServeurDatabaseModel.Store.FK_TblProdutoIngrediente_TblProduto">
+            <End Role="TblProduto" EntitySet="TblProduto" />
+            <End Role="TblProdutoIngrediente" EntitySet="TblProdutoIngrediente" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TblCategoria">
+          <Key>
+            <PropertyRef Name="Categoria_id" />
+          </Key>
+          <Property Name="Categoria_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblIngrediente">
+          <Key>
+            <PropertyRef Name="Ingrediente_id" />
+          </Key>
+          <Property Name="Ingrediente_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Esta_disponivel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblPedido">
+          <Key>
+            <PropertyRef Name="Pedido_id" />
+          </Key>
+          <Property Name="Pedido_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DataDoPedido" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblPedidoItem">
+          <Key>
+            <PropertyRef Name="PedidoItem_id" />
+          </Key>
+          <Property Name="PedidoItem_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Pedido_id" Type="int" Nullable="false" />
+          <Property Name="Produto_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblProduto">
+          <Key>
+            <PropertyRef Name="Produto_id" />
+          </Key>
+          <Property Name="Produto_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria_id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Preco" Type="money" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Foto" Type="image" />
+        </EntityType>
+        <EntityType Name="TblProdutoIngrediente">
+          <Key>
+            <PropertyRef Name="ProdutoIngrediente_id" />
+          </Key>
+          <Property Name="ProdutoIngrediente_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Produto_id" Type="int" Nullable="false" />
+          <Property Name="Ingrediente_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TblPedidoItem_TblPedido">
+          <End Role="TblPedido" Type="EServeurDatabaseModel.Store.TblPedido" Multiplicity="1" />
+          <End Role="TblPedidoItem" Type="EServeurDatabaseModel.Store.TblPedidoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPedido">
+              <PropertyRef Name="Pedido_id" />
+            </Principal>
+            <Dependent Role="TblPedidoItem">
+              <PropertyRef Name="Pedido_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPedidoItem_TblProduto">
+          <End Role="TblProduto" Type="EServeurDatabaseModel.Store.TblProduto" Multiplicity="1" />
+          <End Role="TblPedidoItem" Type="EServeurDatabaseModel.Store.TblPedidoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProduto">
+              <PropertyRef Name="Produto_id" />
+            </Principal>
+            <Dependent Role="TblPedidoItem">
+              <PropertyRef Name="Produto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProduto_TblCategoria">
+          <End Role="TblCategoria" Type="EServeurDatabaseModel.Store.TblCategoria" Multiplicity="1" />
+          <End Role="TblProduto" Type="EServeurDatabaseModel.Store.TblProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCategoria">
+              <PropertyRef Name="Categoria_id" />
+            </Principal>
+            <Dependent Role="TblProduto">
+              <PropertyRef Name="Categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProdutoIngrediente_TblIngrediente">
+          <End Role="TblIngrediente" Type="EServeurDatabaseModel.Store.TblIngrediente" Multiplicity="1" />
+          <End Role="TblProdutoIngrediente" Type="EServeurDatabaseModel.Store.TblProdutoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblIngrediente">
+              <PropertyRef Name="Ingrediente_id" />
+            </Principal>
+            <Dependent Role="TblProdutoIngrediente">
+              <PropertyRef Name="Ingrediente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProdutoIngrediente_TblProduto">
+          <End Role="TblProduto" Type="EServeurDatabaseModel.Store.TblProduto" Multiplicity="1" />
+          <End Role="TblProdutoIngrediente" Type="EServeurDatabaseModel.Store.TblProdutoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProduto">
+              <PropertyRef Name="Produto_id" />
+            </Principal>
+            <Dependent Role="TblProdutoIngrediente">
+              <PropertyRef Name="Produto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EServeurDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EServeurDatabaseEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="sysdiagrams" EntityType="EServeurDatabaseModel.sysdiagrams" />
+          <EntitySet Name="TblCategoria" EntityType="EServeurDatabaseModel.TblCategoria" />
+          <EntitySet Name="TblIngrediente" EntityType="EServeurDatabaseModel.TblIngrediente" />
+          <EntitySet Name="TblPedido" EntityType="EServeurDatabaseModel.TblPedido" />
+          <EntitySet Name="TblPedidoItem" EntityType="EServeurDatabaseModel.TblPedidoItem" />
+          <EntitySet Name="TblProduto" EntityType="EServeurDatabaseModel.TblProduto" />
+          <EntitySet Name="TblProdutoIngrediente" EntityType="EServeurDatabaseModel.TblProdutoIngrediente" />
+          <AssociationSet Name="FK_TblProduto_TblCategoria" Association="EServeurDatabaseModel.FK_TblProduto_TblCategoria">
+            <End Role="TblCategoria" EntitySet="TblCategoria" />
+            <End Role="TblProduto" EntitySet="TblProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProdutoIngrediente_TblIngrediente" Association="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblIngrediente">
+            <End Role="TblIngrediente" EntitySet="TblIngrediente" />
+            <End Role="TblProdutoIngrediente" EntitySet="TblProdutoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPedidoItem_TblPedido" Association="EServeurDatabaseModel.FK_TblPedidoItem_TblPedido">
+            <End Role="TblPedido" EntitySet="TblPedido" />
+            <End Role="TblPedidoItem" EntitySet="TblPedidoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblPedidoItem_TblProduto" Association="EServeurDatabaseModel.FK_TblPedidoItem_TblProduto">
+            <End Role="TblProduto" EntitySet="TblProduto" />
+            <End Role="TblPedidoItem" EntitySet="TblPedidoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProdutoIngrediente_TblProduto" Association="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblProduto">
+            <End Role="TblProduto" EntitySet="TblProduto" />
+            <End Role="TblProdutoIngrediente" EntitySet="TblProdutoIngrediente" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TblCategoria">
+          <Key>
+            <PropertyRef Name="Categoria_id" />
+          </Key>
+          <Property Type="Int32" Name="Categoria_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblProduto" Relationship="EServeurDatabaseModel.FK_TblProduto_TblCategoria" FromRole="TblCategoria" ToRole="TblProduto" />
+        </EntityType>
+        <EntityType Name="TblIngrediente">
+          <Key>
+            <PropertyRef Name="Ingrediente_id" />
+          </Key>
+          <Property Type="Int32" Name="Ingrediente_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Esta_disponivel" Nullable="false" />
+          <NavigationProperty Name="TblProdutoIngrediente" Relationship="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblIngrediente" FromRole="TblIngrediente" ToRole="TblProdutoIngrediente" />
+        </EntityType>
+        <EntityType Name="TblPedido">
+          <Key>
+            <PropertyRef Name="Pedido_id" />
+          </Key>
+          <Property Type="Int32" Name="Pedido_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="DataDoPedido" Nullable="false" />
+          <NavigationProperty Name="TblPedidoItem" Relationship="EServeurDatabaseModel.FK_TblPedidoItem_TblPedido" FromRole="TblPedido" ToRole="TblPedidoItem" />
+        </EntityType>
+        <EntityType Name="TblPedidoItem">
+          <Key>
+            <PropertyRef Name="PedidoItem_id" />
+          </Key>
+          <Property Type="Int32" Name="PedidoItem_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Pedido_id" Nullable="false" />
+          <Property Type="Int32" Name="Produto_id" Nullable="false" />
+          <NavigationProperty Name="TblPedido" Relationship="EServeurDatabaseModel.FK_TblPedidoItem_TblPedido" FromRole="TblPedidoItem" ToRole="TblPedido" />
+          <NavigationProperty Name="TblProduto" Relationship="EServeurDatabaseModel.FK_TblPedidoItem_TblProduto" FromRole="TblPedidoItem" ToRole="TblProduto" />
+        </EntityType>
+        <EntityType Name="TblProduto">
+          <Key>
+            <PropertyRef Name="Produto_id" />
+          </Key>
+          <Property Type="Int32" Name="Produto_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Categoria_id" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Preco" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Foto" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="TblCategoria" Relationship="EServeurDatabaseModel.FK_TblProduto_TblCategoria" FromRole="TblProduto" ToRole="TblCategoria" />
+          <NavigationProperty Name="TblPedidoItem" Relationship="EServeurDatabaseModel.FK_TblPedidoItem_TblProduto" FromRole="TblProduto" ToRole="TblPedidoItem" />
+          <NavigationProperty Name="TblProdutoIngrediente" Relationship="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblProduto" FromRole="TblProduto" ToRole="TblProdutoIngrediente" />
+        </EntityType>
+        <EntityType Name="TblProdutoIngrediente">
+          <Key>
+            <PropertyRef Name="ProdutoIngrediente_id" />
+          </Key>
+          <Property Type="Int32" Name="ProdutoIngrediente_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Produto_id" Nullable="false" />
+          <Property Type="Int32" Name="Ingrediente_id" Nullable="false" />
+          <NavigationProperty Name="TblIngrediente" Relationship="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblIngrediente" FromRole="TblProdutoIngrediente" ToRole="TblIngrediente" />
+          <NavigationProperty Name="TblProduto" Relationship="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblProduto" FromRole="TblProdutoIngrediente" ToRole="TblProduto" />
+        </EntityType>
+        <Association Name="FK_TblProduto_TblCategoria">
+          <End Type="EServeurDatabaseModel.TblCategoria" Role="TblCategoria" Multiplicity="1" />
+          <End Type="EServeurDatabaseModel.TblProduto" Role="TblProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCategoria">
+              <PropertyRef Name="Categoria_id" />
+            </Principal>
+            <Dependent Role="TblProduto">
+              <PropertyRef Name="Categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProdutoIngrediente_TblIngrediente">
+          <End Type="EServeurDatabaseModel.TblIngrediente" Role="TblIngrediente" Multiplicity="1" />
+          <End Type="EServeurDatabaseModel.TblProdutoIngrediente" Role="TblProdutoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblIngrediente">
+              <PropertyRef Name="Ingrediente_id" />
+            </Principal>
+            <Dependent Role="TblProdutoIngrediente">
+              <PropertyRef Name="Ingrediente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPedidoItem_TblPedido">
+          <End Type="EServeurDatabaseModel.TblPedido" Role="TblPedido" Multiplicity="1" />
+          <End Type="EServeurDatabaseModel.TblPedidoItem" Role="TblPedidoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPedido">
+              <PropertyRef Name="Pedido_id" />
+            </Principal>
+            <Dependent Role="TblPedidoItem">
+              <PropertyRef Name="Pedido_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblPedidoItem_TblProduto">
+          <End Type="EServeurDatabaseModel.TblProduto" Role="TblProduto" Multiplicity="1" />
+          <End Type="EServeurDatabaseModel.TblPedidoItem" Role="TblPedidoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProduto">
+              <PropertyRef Name="Produto_id" />
+            </Principal>
+            <Dependent Role="TblPedidoItem">
+              <PropertyRef Name="Produto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProdutoIngrediente_TblProduto">
+          <End Type="EServeurDatabaseModel.TblProduto" Role="TblProduto" Multiplicity="1" />
+          <End Type="EServeurDatabaseModel.TblProdutoIngrediente" Role="TblProdutoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProduto">
+              <PropertyRef Name="Produto_id" />
+            </Principal>
+            <Dependent Role="TblProdutoIngrediente">
+              <PropertyRef Name="Produto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EServeurDatabaseModelStoreContainer" CdmEntityContainer="EServeurDatabaseEntities" >
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblCategoria">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.TblCategoria">
+              <MappingFragment StoreEntitySet="TblCategoria">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Categoria_id" ColumnName="Categoria_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblIngrediente">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.TblIngrediente">
+              <MappingFragment StoreEntitySet="TblIngrediente">
+                <ScalarProperty Name="Esta_disponivel" ColumnName="Esta_disponivel" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Ingrediente_id" ColumnName="Ingrediente_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblPedido">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.TblPedido">
+              <MappingFragment StoreEntitySet="TblPedido">
+                <ScalarProperty Name="DataDoPedido" ColumnName="DataDoPedido" />
+                <ScalarProperty Name="Pedido_id" ColumnName="Pedido_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblPedidoItem">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.TblPedidoItem">
+              <MappingFragment StoreEntitySet="TblPedidoItem">
+                <ScalarProperty Name="Produto_id" ColumnName="Produto_id" />
+                <ScalarProperty Name="Pedido_id" ColumnName="Pedido_id" />
+                <ScalarProperty Name="PedidoItem_id" ColumnName="PedidoItem_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProduto">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.TblProduto">
+              <MappingFragment StoreEntitySet="TblProduto">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Categoria_id" ColumnName="Categoria_id" />
+                <ScalarProperty Name="Produto_id" ColumnName="Produto_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProdutoIngrediente">
+            <EntityTypeMapping TypeName="EServeurDatabaseModel.TblProdutoIngrediente">
+              <MappingFragment StoreEntitySet="TblProdutoIngrediente">
+                <ScalarProperty Name="Ingrediente_id" ColumnName="Ingrediente_id" />
+                <ScalarProperty Name="Produto_id" ColumnName="Produto_id" />
+                <ScalarProperty Name="ProdutoIngrediente_id" ColumnName="ProdutoIngrediente_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1" >
+        <EntityTypeShape EntityType="EServeurDatabaseModel.sysdiagrams" Width="1.5" PointX="8" PointY="2.125" Height="1.9802864583333326" />
+        <EntityTypeShape EntityType="EServeurDatabaseModel.TblCategoria" Width="1.5" PointX="3" PointY="6.125" Height="1.59568359375" />
+        <EntityTypeShape EntityType="EServeurDatabaseModel.TblIngrediente" Width="1.5" PointX="0.875" PointY="4" Height="1.7879850260416683" />
+        <EntityTypeShape EntityType="EServeurDatabaseModel.TblPedido" Width="1.5" PointX="5.875" PointY="1.125" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="EServeurDatabaseModel.TblPedidoItem" Width="1.5" PointX="10.75" PointY="4" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="EServeurDatabaseModel.TblProduto" Width="1.5" PointX="4.875" PointY="3.625" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="EServeurDatabaseModel.TblProdutoIngrediente" Width="1.5" PointX="2.25" PointY="0.875" Height="1.9802864583333317" />
+        <AssociationConnector Association="EServeurDatabaseModel.FK_TblProduto_TblCategoria" >
+          <ConnectorPoint PointX="3.75" PointY="6.125" />
+          <ConnectorPoint PointX="3.75" PointY="4.8749994999999995" />
+          <ConnectorPoint PointX="4.875" PointY="4.8749994999999995" />
+        </AssociationConnector>
+        <AssociationConnector Association="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblIngrediente" >
+          <ConnectorPoint PointX="1.5624995" PointY="4" />
+          <ConnectorPoint PointX="1.5624995" PointY="1.8651432291666659" />
+          <ConnectorPoint PointX="2.25" PointY="1.8651432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="EServeurDatabaseModel.FK_TblPedidoItem_TblPedido" >
+          <ConnectorPoint PointX="7.375" PointY="1.59375" />
+          <ConnectorPoint PointX="11.5" PointY="1.59375" />
+          <ConnectorPoint PointX="11.5" PointY="4" />
+        </AssociationConnector>
+        <AssociationConnector Association="EServeurDatabaseModel.FK_TblPedidoItem_TblProduto" >
+          <ConnectorPoint PointX="6.375" PointY="5.0740364583333317" />
+          <ConnectorPoint PointX="10.75" PointY="5.0740364583333317" />
+        </AssociationConnector>
+        <AssociationConnector Association="EServeurDatabaseModel.FK_TblProdutoIngrediente_TblProduto" >
+          <ConnectorPoint PointX="5.34375" PointY="3.625" />
+          <ConnectorPoint PointX="5.34375" PointY="0.96875" />
+          <ConnectorPoint PointX="3.75" PointY="0.96875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

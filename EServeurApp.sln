@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eserveur", "Eserveur\Eserveur.csproj", "{D4B2F669-5E90-4511-867D-902881003557}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{18E48B5F-ABF2-490B-902D-1D377C661FB0}"
+	ProjectSection(SolutionItems) = preProject
+		IconLogo.ico = IconLogo.ico
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4B2F669-5E90-4511-867D-902881003557}.Debug|x86.ActiveCfg = Debug|x86
+		{D4B2F669-5E90-4511-867D-902881003557}.Debug|x86.Build.0 = Debug|x86
+		{D4B2F669-5E90-4511-867D-902881003557}.Release|x86.ActiveCfg = Release|x86
+		{D4B2F669-5E90-4511-867D-902881003557}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
